@@ -1,0 +1,6 @@
+
+# NEOVIM
+.config/nvim/lazy-lock.json
+
+# TMUX
+.config/tmux/plugins
