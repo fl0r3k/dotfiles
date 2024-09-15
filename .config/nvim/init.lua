@@ -137,6 +137,38 @@ require("lazy").setup({
 	},
 
 	{
+		"https://github.com/github/copilot.vim",
+		init = function()
+			vim.keymap.set("i", "<C-j>", "copilot#Next()", { expr = true })
+			vim.keymap.set("i", "<C-k>", "copilot#Previous()", { expr = true })
+			-- vim.keymap.set("i", "<M-y", 'copilot#Accept("\\<CR>")', {
+			--expr = true,
+			-- replace_keycodes = false,
+			-- })
+			--vim.g.copilot_no_tab_map = true
+		end,
+	},
+
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+		dependencies = {
+			"nvim-telescope/telescope.nvim", -- Only needed if you want to use session lens
+		},
+		---enables autocomplete for opts
+		---@module "auto-session"
+		---@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			-- log_level = 'debug',
+		},
+	},
+
+	{
+		"mg979/vim-visual-multi",
+	},
+
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
