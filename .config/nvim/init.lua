@@ -135,6 +135,69 @@ require("lazy").setup({
 	},
 
 	{
+		"https://github.com/github/copilot.vim",
+		config = function()
+			vim.keymap.set("i", "<C-j>", "copilot#Next()", { expr = true })
+			vim.keymap.set("i", "<C-k>", "copilot#Previous()", { expr = true })
+			-- vim.keymap.set("i", "<M-y", 'copilot#Accept("\\<CR>")', {
+			--expr = true,
+			-- replace_keycodes = false,
+			-- })
+			--vim.g.copilot_no_tab_map = true
+		end,
+	},
+
+	{
+		"rmagatti/auto-session",
+		lazy = false,
+		dependencies = {
+			"nvim-telescope/telescope.nvim", -- Only needed if you want to use session lens
+		},
+		---enables autocomplete for opts
+		---@module "auto-session"
+		---@type AutoSession.Config
+		opts = {
+			suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+			-- log_level = 'debug',
+		},
+	},
+
+	{
+		"mg979/vim-visual-multi",
+		init = function()
+			vim.g.VM_default_mappings = 0
+			vim.g.VM_maps = {
+				["Find Under"] = "<C-n>",
+				["Find Subword Under"] = "<C-N>",
+				["Add Cursor Down"] = "<C-j>",
+				["Add Cursor Up"] = "<C-k>",
+				["Select Next"] = "<S-Right>",
+				["Select Previous"] = "<S-Left>",
+			}
+		end,
+	},
+
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
+	},
+
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
@@ -591,9 +654,11 @@ require("lazy").setup({
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
-				-- sql = { "sql-formatter" },
+				sql = {
+					-- 'sqlfmt',
+					"sql-formatter",
+				},
 			},
-			-- formatters = { sql_formatter, opts = { preppend = {}}},
 		},
 	},
 
