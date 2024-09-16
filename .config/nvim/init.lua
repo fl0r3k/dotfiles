@@ -138,7 +138,7 @@ require("lazy").setup({
 
 	{
 		"https://github.com/github/copilot.vim",
-		init = function()
+		config = function()
 			vim.keymap.set("i", "<C-j>", "copilot#Next()", { expr = true })
 			vim.keymap.set("i", "<C-k>", "copilot#Previous()", { expr = true })
 			-- vim.keymap.set("i", "<M-y", 'copilot#Accept("\\<CR>")', {
@@ -166,6 +166,37 @@ require("lazy").setup({
 
 	{
 		"mg979/vim-visual-multi",
+		init = function()
+			vim.g.VM_default_mappings = 0
+			vim.g.VM_maps = {
+				["Find Under"] = "<C-n>",
+				["Find Subword Under"] = "<C-N>",
+				["Add Cursor Down"] = "<C-j>",
+				["Add Cursor Up"] = "<C-k>",
+				["Select Next"] = "<S-Right>",
+				["Select Previous"] = "<S-Left>",
+			}
+		end,
+	},
+
+	{
+		"kdheepak/lazygit.nvim",
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
 	},
 
 	{
@@ -625,9 +656,11 @@ require("lazy").setup({
 				--
 				-- You can use 'stop_after_first' to run the first available formatter from the list
 				-- javascript = { "prettierd", "prettier", stop_after_first = true },
-				-- sql = { "sql-formatter" },
+				sql = {
+					-- 'sqlfmt',
+					"sql-formatter",
+				},
 			},
-			-- formatters = { sql_formatter, opts = { preppend = {}}},
 		},
 	},
 
