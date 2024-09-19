@@ -134,16 +134,24 @@ require("lazy").setup({
 		},
 	},
 
+	-- { "github/copilot.vim" },
 	{
-		"https://github.com/github/copilot.vim",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
 		config = function()
-			vim.keymap.set("i", "<C-j>", "copilot#Next()", { expr = true })
-			vim.keymap.set("i", "<C-k>", "copilot#Previous()", { expr = true })
-			-- vim.keymap.set("i", "<M-y", 'copilot#Accept("\\<CR>")', {
-			--expr = true,
-			-- replace_keycodes = false,
-			-- })
-			--vim.g.copilot_no_tab_map = true
+			require("copilot").setup({
+				panel = { enabled = false },
+				suggestion = { enabled = false },
+			})
+		end,
+	},
+
+	{
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = function()
+			require("copilot_cmp").setup()
 		end,
 	},
 
@@ -618,8 +626,8 @@ require("lazy").setup({
 	{ -- Autoformat
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
 		keys = {
+			cmd = { "ConformInfo" },
 			{
 				"<leader>f",
 				function()
@@ -697,13 +705,14 @@ require("lazy").setup({
 			--  into multiple repos for maintenance purposes.
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-path",
+			"onsails/lspkind.nvim",
 		},
 		config = function()
 			-- See `:help cmp`
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 			luasnip.config.setup({})
-
+			local lspkind = require("lspkind")
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -711,7 +720,15 @@ require("lazy").setup({
 					end,
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
-
+				formatting = {
+					fields = { cmp.ItemField.Kind, cmp.ItemField.Abbr, cmp.ItemField.Menu },
+					expandable_indicator = true,
+					format = lspkind.cmp_format({
+						mode = "symbol",
+						max_width = 50,
+						symbol_map = { Copilot = "" },
+					}),
+				},
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
 				--
@@ -765,11 +782,12 @@ require("lazy").setup({
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 				}),
 				sources = {
-					{
-						name = "lazydev",
-						-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-						group_index = 0,
-					},
+					--{
+					--	name = "lazydev",
+					--	-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+					--	group_index = 0,
+					--},
+					{ name = "copilot" },
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "path" },
