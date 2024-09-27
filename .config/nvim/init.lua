@@ -1,23 +1,47 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Enable nice icons if a Nerd Font installed
 vim.g.have_nerd_font = true
 
+-- Shows line numbers and relative line numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+vim.opt.wrap = false
+
+-- vim.opt.expandtab = true
+-- tabstop and shiftwidth are detected automatically by vim-sleuth plugin
+-- vim.opt.tabstop = 2
+-- vim.opt.shiftwidth = 2
+
+-- Enables system clipboard sychronization
+vim.opt.clipboard = "unnamedplus"
+
+-- Setting this to very higth number will make cursor always in the middle of the screen
+vim.opt.scrolloff = 999
+
+vim.opt.virtualedit = "block"
+
+-- Shows preview of substitiution when using :s
+vim.opt.inccommand = "split"
+
+vim.opt.ignorecase = true
+
+vim.opt.smartcase = true
+
+vim.opt.termguicolors = true
 
 vim.opt.mouse = "a"
 
 vim.opt.showmode = false
 
-vim.opt.clipboard = "unnamedplus"
-
 vim.opt.breakindent = true
 
 vim.opt.undofile = true
-
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
 
 vim.opt.signcolumn = "yes"
 
@@ -25,25 +49,20 @@ vim.opt.updatetime = 250
 
 vim.opt.timeoutlen = 300
 
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
-vim.opt.inccommand = "split"
-
 vim.opt.cursorline = true
-
-vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Page down and center cursor in the middle" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Page up and center cursor in the middle" })
+-- Centers cursor in the middle of the screen when moving up or down
+-- If scrolloff is set to center cursor then it is not needed
+-- vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Page down and center cursor in the middle" })
+-- vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Page up and center cursor in the middle" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -82,8 +101,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
+-- PLUGINS
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -94,20 +112,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
--- NOTE: Here is where you install your plugins.
 require("lazy").setup({
-	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+	-- Detect tabstop and shiftwidth automatically
+	"tpope/vim-sleuth",
 
 	-- NOTE: Plugins can also be added by using a table,
 	-- with the first argument being the link and the following
@@ -123,6 +130,7 @@ require("lazy").setup({
 	-- See `:help gitsigns` to understand what the configuration keys do
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
+		tag = "v0.9.0",
 		opts = {
 			signs = {
 				add = { text = "+" },
@@ -131,6 +139,7 @@ require("lazy").setup({
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
+			debug_mode = true,
 		},
 	},
 
