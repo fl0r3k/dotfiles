@@ -3,9 +3,7 @@ return {
 	event = "VimEnter",
 	branch = "0.1.x",
 	dependencies = {
-		{
-			"nvim-lua/plenary.nvim",
-		},
+		{ "nvim-lua/plenary.nvim" },
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
 			build = "make",
@@ -27,6 +25,13 @@ return {
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
+				},
+			},
+			pickers = {
+				live_grep = {
+					additional_args = function()
+						return { "--hidden" }
+					end,
 				},
 			},
 		})

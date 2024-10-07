@@ -88,21 +88,7 @@ return {
 					},
 				},
 			},
-			pyright = {
-				settings = {
-					pyright = {
-						disableOrganizeImports = true,
-					},
-					--python = {
-					--	analysis = {
-					--		ignore = { "*" },
-					--	},
-					--},
-				},
-			},
-			ruff = {},
-			sqlls = {},
-			-- sqls = {},
+			pyright = {},
 		}
 
 		require("mason").setup()
@@ -111,7 +97,11 @@ return {
 		vim.list_extend(ensure_installed, {
 			-- Lua
 			"stylua",
-			--SQL
+			-- Python
+			"black",
+			"isort",
+			"flake8",
+			-- SQL
 			"sql-formatter",
 			"sqlfluff",
 			"sqlfmt",

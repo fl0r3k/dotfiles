@@ -2,8 +2,11 @@ return {
 	"stevearc/oil.nvim",
 	---@module 'oil'
 	---@type oil.SetupOpts
-	opts = {},
-	-- Optional dependencies
+	opts = {
+		keymaps = {
+			["<C-h>"] = false,
+			["<C-l>"] = false,
+		},
+	},
 	dependencies = { { "echasnovski/mini.icons", opts = {} } },
-	-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
 }
