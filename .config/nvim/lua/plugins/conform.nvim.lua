@@ -35,6 +35,7 @@ return {
 				-- 'sqlfmt',
 				"sql-formatter",
 			},
+			json = { "jq" },
 		},
 	},
 }

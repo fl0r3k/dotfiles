@@ -105,6 +105,8 @@ return {
 			"sql-formatter",
 			"sqlfluff",
 			"sqlfmt",
+			-- JSON
+			"jq",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
