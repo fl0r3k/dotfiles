@@ -70,7 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gcloud git tmux zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zoxide zsh-autocomplete)
+plugins=(docker gcloud git tmux zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zoxide zsh-autocomplete)
 
 ZSH_TMUX_AUTOSTART=true
 
@@ -116,6 +116,9 @@ eval "$(pyenv init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# go
+export PATH=$PATH:/usr/local/go/bin
 
 # user local bin
 export PATH="/home/fl0r3k/.local/bin:$PATH"
