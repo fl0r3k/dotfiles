@@ -15,7 +15,11 @@ return {
 	opts = {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
-			local disable_filetypes = { c = true, cpp = true }
+			local disable_filetypes = {
+				sql = true,
+				json = true,
+				yaml = true,
+			}
 			local lsp_format_opt
 			if disable_filetypes[vim.bo[bufnr].filetype] then
 				lsp_format_opt = "never"
@@ -31,10 +35,9 @@ return {
 			go = { "gofmt" },
 			lua = { "stylua" },
 			python = { "isort", "black" },
-			sql = {
-				-- 'sqlfmt',
-				"sql-formatter",
-			},
+			sql = { "sql-formatter" },
+			json = { "jq" },
+			yaml = { "yq" },
 		},
 	},
 }
