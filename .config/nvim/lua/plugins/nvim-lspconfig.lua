@@ -78,7 +78,6 @@ return {
 
 		local servers = {
 			gopls = {},
-			-- delve = {},
 			lua_ls = {
 				settings = {
 					Lua = {
@@ -100,13 +99,14 @@ return {
 			-- Python
 			"black",
 			"isort",
-			"flake8",
 			-- SQL
 			"sql-formatter",
 			"sqlfluff",
 			"sqlfmt",
 			-- JSON
 			"jq",
+			-- YAML
+			"yq",
 		})
 
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
