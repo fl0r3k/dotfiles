@@ -20,24 +20,26 @@ return {
 				json = true,
 				yaml = true,
 			}
-			local lsp_format_opt
 			if disable_filetypes[vim.bo[bufnr].filetype] then
-				lsp_format_opt = "never"
-			else
-				lsp_format_opt = "fallback"
+				return nil
 			end
 			return {
-				timeout_ms = 500,
-				lsp_format = lsp_format_opt,
+				timeout_ms = 1000,
+				lsp_format = "fallback",
 			}
 		end,
 		formatters_by_ft = {
 			go = { "gofmt" },
 			lua = { "stylua" },
 			python = { "isort", "black" },
-			sql = { "sql-formatter" },
+			sql = { "sql_formatter" },
 			json = { "jq" },
 			yaml = { "yq" },
+		},
+		formatters = {
+			sql_formatter = {
+				args = { "--config", ".sql-formatter.json" },
+			},
 		},
 	},
 }
