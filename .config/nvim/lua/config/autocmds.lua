@@ -1,3 +1,19 @@
 -- Autocmds are automatically loaded on the VeryLazy event
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
+
+-- Function to remove ^M symbols (carriage returns)
+-- local function clean_paste()
+--   local saved_reg = vim.fn.getreg('"') -- Save the default register
+--   vim.cmd([[normal! ggvG]]) -- Select the pasted text
+--   vim.cmd([[normal! g?g]]) -- Convert DOS line endings to Unix
+--   vim.fn.setreg('"', saved_reg) -- Restore the default register
+-- end
+--
+-- -- Auto command to clean pasted text
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   pattern = "*",
+--   callback = function()
+--     clean_paste()
+--   end,
+-- })
